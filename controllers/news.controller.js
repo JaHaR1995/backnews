@@ -6,13 +6,12 @@ module.exports.newsController = {
       const news = await News.create({  
         img: req.body.img,
         name: req.body.name,
-        description: req.body.description,
+        description: req.body.description,  
         category: req.body.category,
-        comment: req.body.comment      
       });
       res.json(news);
     } catch (error) {
-      console.log(error);
+      console.log(error);     
     }
   },
 
@@ -25,23 +24,33 @@ module.exports.newsController = {
     }
   },
 
-  editNews: async (req, res) => {
-    try {
-      const news = await News.findByIdAndUpdate(req.params.id,{
-        img: req.body.img,
-        name: req.body.name,
-        description: req.body.description,
-        category: req.body.category,   
-        $push: { Comment: {
-          user: req.body.user,
-          text: req.body.text
-        }}
-      });
-      res.json(news);
-    } catch (error) {
-      console.log(error);
-    }
+  createComment: async (req, res) =>{
+    const { text, userId, } = req.body;
+
+    const comments =await Comment.create({
+      user: userId,
+      text
+    })
+    res.json(comments)  
   },
+
+  // editNews: async (req, res) => {
+  //   try { 
+  //     const news = await News.findByIdAndUpdate(req.params.id,{   
+  //       img: req.body.img,
+  //       name: req.body.name,
+  //       description: req.body.description,
+  //       category: req.body.category,   
+  //       $push: { Comment: {
+  //         user: req.body.user,
+  //         text: req.body.text   
+  //       }}
+  //     });
+  //     res.json(news);
+  //   } catch (error) {
+  //     console.log(error);    
+  //   }
+  // },
 
   deleteNews: async (req, res) => {
     try {

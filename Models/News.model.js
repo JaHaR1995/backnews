@@ -10,13 +10,12 @@ const newsShema = mongoose.Schema({
          ref: 'Category'  
     },
 
-    comment:[{
-        user: {
-            type: mongoose.SchemaTypes.ObjectId,   
-            ref: 'Users' 
-        },
-        text: String
-    }]
+    // comment:[{
+    //     user: {
+    //         type: mongoose.SchemaTypes.ObjectId,   
+    //         ref: 'Users' 
+    //     },
+    // }]
 
 
 })
